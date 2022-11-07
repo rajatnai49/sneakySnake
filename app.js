@@ -2,7 +2,7 @@
 const canvas = document.getElementById('game');
 //"2d", leading to the creation of a CanvasRenderingContext2D object representing a two-dimensional rendering context.
 const ctx = canvas.getContext('2d');
-const sc = $(".currScore")
+
 //increase snake size create snake parts
 class snakePart {
     constructor(x, y) {
@@ -65,7 +65,7 @@ function isGameOver() {
         //if snake hits left wall
         gameOver = true;
     }
-    else if (headX > tileCount) {
+    else if (headX === tileCount) {
         //if snake hits right wall
         gameOver = true;
     }
@@ -73,7 +73,7 @@ function isGameOver() {
         //if snake hits wall at the top
         gameOver = true;
     }
-    else if (headY > tileCount) {
+    else if (headY === tileCount) {
         //if snake hits wall at the bottom
         gameOver = true;
     }
@@ -104,7 +104,12 @@ function isGameOver() {
 
 // score function
 function drawScore() {
-    sc.text("Score: " + score);
+    // set our text color to white
+    ctx.fillStyle = "white"
+    //set font size to 10px of font family verdena
+    ctx.font = "10px verdena"
+    // position our score at right hand corner 
+    ctx.fillText("Score: " + score, canvas.clientWidth - 50, 10);
 }
 
 // clear our screen
@@ -122,23 +127,27 @@ function drawSnake() {
         //draw snake parts
         let part = snakeParts[i]
         // ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize)
+        ctx.strokeStyle = 'green';
         ctx.beginPath();
-        ctx.arc(part.x * tileCount, part.y * tileCount, 10, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx.roundRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize, [10]);
         ctx.stroke();
+        ctx.fill();
     }
     //add parts to snake --through push
     //put item at the end of list next to the head
     snakeParts.push(new snakePart(headX, headY));
-        if (snakeParts.length > tailLength) {
-            //remove furthest item from  snake part if we have more than our tail size
-            snakeParts.shift();
+    if (snakeParts.length > tailLength) {
+        //remove furthest item from  snake part if we have more than our tail size
+        snakeParts.shift();
     }
-    ctx.fillStyle = "orange";
+    // ctx.fillStyle = "orange";
+    // ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize)
+    ctx.strokeStyle = 'orange';
+    ctx.fillStyle = 'orange'
     ctx.beginPath();
-    ctx.arc(headX * tileCount, headY * tileCount, 10, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.roundRect(headX * tileCount, headY * tileCount, tileSize, tileSize, [10]);
     ctx.stroke();
+    ctx.fill();
 }
 
 function changeSnakePosition() {
@@ -147,12 +156,14 @@ function changeSnakePosition() {
 }
 
 function drawApple() {
-    ctx.fillStyle = "red";
+    // ctx.fillStyle = "red";
     // ctx.fillRect(appleX * tileCount, appleY * tileCount, tileSize, tileSize)
+    ctx.strokeStyle = 'red';
+    ctx.fillStyle = 'red'
     ctx.beginPath();
-    ctx.arc(appleX * tileCount, appleY * tileCount, 10, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.roundRect(appleX* tileCount, appleY * tileCount, tileSize, tileSize, [10]);
     ctx.stroke();
+    ctx.fill();
 }
 
 // check for collision and change apple position
@@ -162,7 +173,7 @@ function checkCollision() {
         appleY = Math.floor(Math.random() * tileCount);
         tailLength++;
         //increase our score value
-        score++; 
+        score++;
     }
 }
 
@@ -194,7 +205,7 @@ function keyDown(event) {
         xvelocity = 0;
     }
 
-    
+
     //right
     if (event.keyCode == 39) {
         if (xvelocity == -1)
@@ -203,5 +214,36 @@ function keyDown(event) {
         xvelocity = 1;
     }
 }
+
+$(document).ready(function () {
+    $("#upbtn").click(function () {
+        if (yvelocity == 1)
+            return;
+        yvelocity = -1;
+        xvelocity = 0;
+    });
+
+    $("#leftbtn").click(function () {
+        if (xvelocity == 1)
+            return;
+        yvelocity = 0;
+        xvelocity = -1;
+    });
+
+    $("#rightbtn").click(function () {
+        if (xvelocity == -1)
+            return;
+        yvelocity = 0;
+        xvelocity = 1;
+    });
+
+    $("#downbtn").click(function () {
+        if (yvelocity == -1)
+            return;
+        yvelocity = 1;
+        xvelocity = 0;
+    });
+
+});
 
 drawGame(); 

@@ -7,3 +7,34 @@ body{
     align-items: center;
     text-align: center;
 }
+
+.controller {
+    margin-top: 30px;
+}
+
+.cnbtn {
+    /* margin: 20px; */
+  outline: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  /* padding: 10px 25px; */
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  /* font-weight: 900; */
+  font-size: xx-large;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.cnbtn:hover {
+    box-shadow:
+    -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+ }
