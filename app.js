@@ -12,7 +12,7 @@ class snakePart {
 }
 
 //decide the speed of snake
-let speed = 10;
+let speed = 7;
 //width of canvas
 let tileCount = 20;
 //clientWidth property is common to all Elements and represents the number of pixels horizontally occupied by the canvas
