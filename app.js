@@ -168,6 +168,21 @@ function drawApple() {
 
 // check for collision and change apple position
 function checkCollision() {
+    let cox=-1
+    let coy=-1
+    
+     for (let i = 0; i < snakeParts.length; i++) {
+        let part = snakeParts[i]
+        cox=part.x
+        coy=part.y
+        if(cox==appleX && coy==appleY){
+        appleX = Math.floor(Math.random() * tileCount);
+        appleY = Math.floor(Math.random() * tileCount);
+        ctx.checkCollison()
+            
+        }
+    }
+    
     if (appleX == headX && appleY == headY) {
         appleX = Math.floor(Math.random() * tileCount);
         appleY = Math.floor(Math.random() * tileCount);
